@@ -1,0 +1,1 @@
+{"Nome": "Guido Van Rossum ", "Linguagem": "Python", "Similar": ["C", "Mudula-3", "lisp"], "User": 100000}
