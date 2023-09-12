@@ -1,8 +1,9 @@
 from datetime import date
-
 import pandas as pd
 from pandas import  DataFrame
 from tabulate import tabulate
+import numpy as np
+import  random
 
 """
 [PT-BR]
@@ -70,13 +71,20 @@ print(f"The specifc line in the data frame are:\n{dataFrameOne.filter(items=['St
 print(f"The specifc line in the data frame are:\n{dataFrameOne.filter(items=['StateOne'], axis=1)}")
 
 
+#Resume of Dataframe Statistics
+print(f"The resume of statistics Dataframe is:\n\n{dataFrameOne.describe()}")
 
+#Now we going to verifi the Na values in data frame
 
+#Number_Of_Na = lambda value: "True" if value == "True"
+print(f"There' is Na values in  dataframeOne: \n{dataFrameOne.isna()}")
 
+#Input a randon numbers in a colunm
+#dataFrameOne['Growth Hate'] = np.arange(5.)
+dataFrameOne['Growth Hate'] = random.random() * np.arange(5.)
+#Show the values inputed on a data frame one
 
-
-
-
+print(tabulate(dataFrameOne, headers = 'keys', tablefmt = 'psql'))
 
 
 
