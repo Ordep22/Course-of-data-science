@@ -44,7 +44,7 @@ print(f"{tabulate(dataFrame.head())}")
 numbersOfNan = dataFrame.isna().sum()
 print(f"There are {numbersOfNan} in the dataset!")
 
-#Extract moda of colunm Progression Quality
+#Extract mode of colunm Progression Quality
 moda  = dataFrame["4th chord"].value_counts().index[0]
 print(f"The most comum value in the 4th chord is: {moda}")
 
