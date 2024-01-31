@@ -36,7 +36,11 @@ Welcome to the Data Science with Python course offered by the [Data Science Acad
 
 9. Basic Level Python Language - Mathematics and Matrix Manipulation with Numpy ✅
 
-10. Basic Level Python Language - Data manipulation with Pandas ⏳
+10. Basic Level Python Language - Data manipulation with Pandas ✅
+
+11. Basic Level Python Language - Data visualization with Pandas and Seaborn ✅
+
+12. Basic Level Python Language - Data analyses with Python and SQL language  ⚙️ 
  
 
 ### 💻  Technologies
