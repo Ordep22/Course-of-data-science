@@ -10,9 +10,10 @@ cities_sales = dataFrame.groupby('Cidade')['Valor_Venda'].sum()
 
 new = cities_sales.sort_values(ascending=False)
 #serie_names  = new.index
-plt.figure(figsize=(13,8))
-sea.barplot(new.iloc[0:10])
-plt.xticks(rotation = 80)
+plt.figure(figsize=(16,8))
+sea.set_palette('coolwarm')
+sea.barplot(new.head(10)) #iloc is not recomendaded
+plt.xticks(rotation = 50)
 plt.show()
 
 
