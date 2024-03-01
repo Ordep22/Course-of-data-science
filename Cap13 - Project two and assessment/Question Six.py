@@ -11,9 +11,12 @@ for index in range(0,len(dataFrame['Data_Pedido']),1):
 
 print(dataFrame.head())
 
-total  = dataFrame.groupby(['Segmento', 'Data_Pedido'])['Valor_Venda'].sum()
+#total  = dataFrame.groupby(['Segmento', 'Data_Pedido'])['Valor_Venda'].sum()
+total  = dataFrame.groupby(['Data_Pedido', 'Segmento'])['Valor_Venda'].sum()
+print(total.head())
 
-fig, axes = plt.subplots(1, 3, figsize=(25, 6))
+
+'''fig, axes = plt.subplots(1, 3, figsize=(25, 6))
 fig.suptitle('Sales per year and segment')
 
 # Bulbasaur
@@ -36,7 +39,7 @@ plt.subplots_adjust(left=0.1,
                     hspace=0.4)
 
 plt.savefig("/Users/PedroVitorPereira/Documents/GitHub/Course-of-data-science/Cap13 - Project two and assessment/RQ_6")
-#plt.show()
+#plt.show()'''
 
 
 
