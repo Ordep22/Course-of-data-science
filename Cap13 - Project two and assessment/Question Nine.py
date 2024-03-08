@@ -1,4 +1,4 @@
-import pandas as pd
+import matplotlib.pyplot as plt
 
 from libraries import  *
 
@@ -20,15 +20,23 @@ print(dataFrame.head())
 
 for index in range(0,len(dataFrame['Data_Pedido']),1):
 
-        dataFrame['Ano_Pedido'][index] = dataFrame['Data_Pedido'][index][6:]
+        #It`s so important to use in dayle data scienc!
+        dataFrame.iat[index,2] = dataFrame['Data_Pedido'][index][6:]
 
-        dataFrame['Mes_Pedido'][index] = dataFrame['Data_Pedido'][index][3:5]
+        dataFrame.iat[index,3] = dataFrame['Data_Pedido'][index][3:5]
+
+average_sales = dataFrame.groupby(['Ano_Pedido','Mes_Pedido','Segmento'])['Valor_Venda'].agg([np.sum,np.mean,np.median])
+
+
+year = average_sales.index.get_level_values(0)
+months  = average_sales.index.get_level_values(1)
+segment  = average_sales.index.get_level_values(2)
+
+plt.figure(figsize=(12,6))
+sea.set()
+fig = sea.relplot(kind = 'line', data=average_sales, y = 'mean',x = months, hue = segment, col = year, col_wrap= 4)
+plt.savefig("/Users/PedroVitorPereira/Documents/GitHub/Course-of-data-science/Cap13 - Project two and assessment/RQ_9")
 
 
 
-average_sales_year = dataFrame.groupby(['Ano_Pedido','Segmento'])['Valor_Venda'].mean()
-
-average_sales_month = dataFrame.groupby(['Mes_Pedido','Segmento'])['Valor_Venda'].mean()
-
-print(average_sales_month)
 

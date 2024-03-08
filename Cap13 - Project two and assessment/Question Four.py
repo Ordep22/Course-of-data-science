@@ -8,6 +8,8 @@ dataFrame  = pd.DataFrame(data)
 
 cities_sales = dataFrame.groupby('Cidade')['Valor_Venda'].sum()
 
+
+
 new = cities_sales.sort_values(ascending=False)
 #serie_names  = new.index
 plt.figure(figsize=(16,8))
