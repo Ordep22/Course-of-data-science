@@ -14,5 +14,20 @@ print(f"Number of columns: {dataFrame.columns}")
 print("\n")
 print(f"Info: {dataFrame.info()}")
 
+#Starting the exploration analyse
+
+#Check if there are any null values
+print(30*"--")
+print("Count of null values")
+print(dataFrame.isnull().sum())
+
+#Statistic resume
+print(30*"--")
+print("Statistic resume")
+print(dataFrame.describe())
+
+
+
+
 
 
