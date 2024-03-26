@@ -40,7 +40,13 @@ Welcome to the Data Science with Python course offered by the [Data Science Acad
 
 11. Basic Level Python Language - Data visualization with Pandas and Seaborn ✅
 
-12. Basic Level Python Language - Data analyses with Python and SQL language  ⚙️ 
+12. Basic Level Python Language - Data analyses with Python and SQL language  ✅
+
+13. ️ Project two and evaluation tow ✅
+
+14. Intermidiate Level Python Language - Statistics with Statsmodels
+
+
  
 
 ### 💻  Technologies
