@@ -44,7 +44,7 @@ Welcome to the Data Science with Python course offered by the [Data Science Acad
 
 13. ️ Project two and evaluation tow ✅
 
-14. Intermidiate Level Python Language - Statistics with Statsmodels
+14. Intermidiate Level Python Language - Statistics with Statsmodels ✅
 
 
  
