@@ -46,6 +46,9 @@ Welcome to the Data Science with Python course offered by the [Data Science Acad
 
 14. Intermidiate Level Python Language - Statistics with Statsmodels ✅
 
+15. Intermidiate Level Python Language - Michine Learning with Scikit - Learn ⚙️
+
+
 
  
 
