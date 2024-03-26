@@ -26,6 +26,21 @@ independentVariable = sn.add_constant(independentVariable)
 
 model = sn.OLS(dependentVariable,independentVariable)
 
+result = model.fit()
+
+print("\n")
+print(result.summary())
+
+#Showing the result by a linear regression graph
+plt.figure(figsize =  (12,8))
+plt.xlabel("area_m2",size  = 16)
+plt.ylabel('valor_aluguel',size  = 16)
+plt.plot(independentVariable["area_m2"],dependentVariable, "o", label = "Dados Reais")
+plt.plot(independentVariable["area_m2"],result.fittedvalues, "r-", label  = "Regression Line (Prevision Model)")
+plt.legend(loc = "best")
+plt.savefig(os.getcwd() + "/Linear_Regression.png")
+
+
 
 
 
