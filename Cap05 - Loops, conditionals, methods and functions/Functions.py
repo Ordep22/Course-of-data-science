@@ -134,3 +134,70 @@ text = " This function will be useful to split bisg values of datas"
 
 #Split text implementing the new function
 print(SplitStringWords(text))
+
+
+
+
+#Function arguments with default values
+
+def test_function(number_of_itens, item_name  = "Tenis"):
+    print(f"Você tem {number_of_itens} {item_name}")
+
+test_function(10)
+test_function(10, "Camisetas")
+
+    
+
+#Functions with variable number of arguments
+""""
+The *args and **kwargs are used in function definitions to allow for a variable number of arguments to be passed to the function.
+"""
+def sum_all(*args):
+    sum  = 0
+    for i in args:
+        sum += i
+    return sum
+
+print(sum_all(1,2,3,4,5))
+print("\n\n-----------------------------\n\n")
+
+def exibe_all_people(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+exibe_all_people(name="John", age=30, city="New York", occupation="Developer")
+
+print("\n\n-----------------------------\n\n")
+
+
+    
+#Lambda functions
+
+my_data_list = [1, 2, 3, 4, 5]
+
+#Using lambda function to square each element in the list
+my_new_list = list(map(lambda x: x ** 2,my_data_list))
+print(my_new_list)
+
+
+my_new_par_lis = list(filter(lambda x:x % 2 == 0, my_new_list))
+print(my_new_par_lis)
+
+
+a = "Pedro"
+
+upper = lambda x:x.upper()
+
+print(upper(a))
+
+
+
+
+
+
+
+
+
+
+
+
