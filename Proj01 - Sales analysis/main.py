@@ -5,6 +5,7 @@ import seaborn as sns
 import random
 from datetime import datetime, timedelta
 import os
+from matplotlib.ticker import FuncFormatter
 
 
 
@@ -42,7 +43,11 @@ def dsa_gera_dados_ficticios(num_registros: int = 10000) -> pd.DataFrame:
     dados_vendas  = []
 
     #Define a data inicial dos pedidos
-    data_inicial  = datetime(2026, 1, 1)
+    data_inicial  = datetime(2025, 1, 1)
+
+    data_final = datetime(2026,2,20)
+
+    
 
     #Loop para gerar os registros de vendas
     for i in range(num_registros):
@@ -57,7 +62,7 @@ def dsa_gera_dados_ficticios(num_registros: int = 10000) -> pd.DataFrame:
         quantidade = random.randint(1, 8)
 
         #Calcula a data do pedido a partir da data inicial
-        data_pedido  = data_inicial + timedelta(days = int(i/5), hours = random.randint(0, 23))
+        data_pedido  = data_inicial + timedelta(days = random.randint(0,365), hours = random.randint(0, 23)) 
 
         #Se o produto for Muse ou Teclado, aplica desconto aleatório entre 5% e 15%
 
@@ -80,11 +85,11 @@ def dsa_gera_dados_ficticios(num_registros: int = 10000) -> pd.DataFrame:
             
         })
 
-        #Mensagem final incicando que a geração terminou
-        print(f"\nGeração de dados concluída! {num_registros} registros de vendas foram gerados com sucesso.")
+    #Mensagem final incicando que a geração terminou
+    print(f"\nGeração de dados concluída! {num_registros} registros de vendas foram gerados com sucesso.")
 
-        #Retorn os dado no formato de DataFrame do Pandas
-        return pd.DataFrame(dados_vendas)
+    #Retorn os dado no formato de DataFrame do Pandas
+    return pd.DataFrame(dados_vendas)
 
 
 
@@ -96,10 +101,12 @@ def main():
     #Gerando, carregando e explorando os dados
 
     #Gerar dados de venda fictícios
-    df_vendas = dsa_gera_dados_ficticios()
+    df_vendas = dsa_gera_dados_ficticios(10000)
 
     #Mostra o início do DataFrame gerado
-    print(df_vendas.head())
+    print(f"\nOs dados de venda são:")
+    print(df_vendas.head(5))
+    print('\n')
 
     #Mostra o final do DataFrame gerado
     print(df_vendas.tail())
@@ -170,6 +177,112 @@ def main():
     print(df_vendas.head())
     df_vendas['Mes'] = df_vendas['Data do Pedido'].dt.to_period('M')
     print(df_vendas.head())
+
+    #Agrupando por mêse somando o faturmaneot
+    faturamento_mensal  = df_vendas.groupby('Mes')['Faturamento'].sum()
+
+    #Converte o índice para string para facilitar aplotagem no gráfico
+    faturamento_mensal.index = faturamento_mensal.index.strftime('%Y-%m')
+
+    faturamento_mensal.map('R$ {:,.2f}'.format)
+    print(f"\nFaturamento mensal:\n{faturamento_mensal}")
+    
+
+    #Cria uma nova figura com tamanho de 12 por 6 polegadas
+    plt.figure(figsize = (12,6))
+    faturamento_mensal.plot(kind = 'line', marker = 'o', linestyle = '-', color = 'green')
+    plt.title('Faturamento Mensal', fontsize=16)
+    plt.xlabel('Mês', fontsize=12)
+    plt.ylabel('Faturamento (R$)', fontsize=12)
+    plt.xticks(rotation=45)
+    plt.grid(True,which='both', linestyle='--', linewidth=0.5)
+    plt.tight_layout()
+    plt.show()
+
+
+    #Analise 3  - Vendas por Estado
+    vendas_por_estado = df_vendas.groupby('Estado')['Faturamento'].sum().sort_values(ascending=False)
+    
+    #Formata para duas casa decimais
+    vendas_por_estado.map('R$ {:,.2f}'.format)
+
+    # Cria uma nova figura com tamanho de 12 por 7 polegadas
+    plt.figure(figsize = (12, 7))
+
+    # Plota os dados de faturamento por estado em formato de gráfico de barras
+    # Usando a paleta de cores "rocket" do Seaborn
+    vendas_por_estado.plot(kind = 'bar', color = sns.color_palette("husl", 7))
+
+    # Define o título do gráfico com fonte de tamanho 16
+    plt.title('Faturamento Por Estado', fontsize = 16)
+
+    # Define o rótulo do eixo X
+    plt.xlabel('Estado', fontsize = 12)
+
+    # Define o rótulo do eixo Y
+    plt.ylabel('Faturamento (R$)', fontsize = 12)
+
+    # Mantém os rótulos do eixo X na horizontal (sem rotação)
+    plt.xticks(rotation = 0)
+
+    # Ajusta automaticamente os elementos do gráfico para evitar sobreposição
+    plt.tight_layout()
+
+    # Exibe o gráfico
+    plt.show()
+
+
+    #Análise 4 - Faturmanto por Categoria
+
+    #Agrupa por categoria, soma o faturmento e formara como meda para melhorar leitura
+    faturamento_categoria  = df_vendas.groupby('Categoria')['Faturamento'].sum().sort_values(ascending=False)
+
+    #Formata para melhor visualisação
+    faturamento_categoria.map('R$ {:,.2f}'.format)
+
+    print(f"\n\n O faturamento por categoria é: \n{faturamento_categoria}")
+
+
+    #Ordena os dados para o gráfico ficar mais fácil de ler
+    faturamento_ordenado = faturamento_categoria.sort_values(ascending=False)
+
+    #Cria a Figura e o Eixos (ax) com plt.subplots()
+    #Isso nos dá mais controle sobre os elementos gráfcos.
+    fig, ax = plt.subplots(figsize = (12,7))
+
+    #Cria uma função para formatar os números
+    #Esta função recebe um valor 'y' e o transforma em uma string no formato 'R$ XX K'
+    def formatador_milhares(y,pos):
+        """Formata o valor em milhares (K) cm cifrão R$."""
+        return f'R$ {y/1000:,.0f}K'
+
+    # Cria o objeto formatador
+    formatter = FuncFormatter(formatador_milhares)
+
+    # Aplica o formatador ao eixo Y (ax.yaxis)
+    ax.yaxis.set_major_formatter(formatter)
+
+    # Plota os dados usando o objeto 'ax'
+    faturamento_ordenado.plot(kind = 'bar', ax = ax, color = sns.color_palette("viridis", len(faturamento_ordenado)))
+
+
+    #Adiciona títulos e labels usando 'ax.set_..'
+    ax.set_title('Faturamento Por Categoria', fontsize = 16)
+    ax.set_xlabel('Categoria', fontsize = 12)
+    ax.set_ylabel('Faturamento', fontsize = 12)
+
+    #Ajusta a rotação dos rótulos do eixo x
+    plt.xticks(rotation = 45, ha = 'right')
+
+    #Garante que tudo fique bem ajustado na imagem final
+    plt.tight_layout()
+
+    # Exibe o gráfico
+    plt.show()
+    
+
+
+
 
 
 if __name__ == '__main__':
