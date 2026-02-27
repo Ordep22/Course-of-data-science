@@ -211,7 +211,7 @@ def main():
 
     # Plota os dados de faturamento por estado em formato de gráfico de barras
     # Usando a paleta de cores "rocket" do Seaborn
-    vendas_por_estado.plot(kind = 'bar', color = sns.color_palette("husl", 7))
+    vendas_por_estado.plot(kind = 'bar', color = sns.color_palette("flare"))
 
     # Define o título do gráfico com fonte de tamanho 16
     plt.title('Faturamento Por Estado', fontsize = 16)
