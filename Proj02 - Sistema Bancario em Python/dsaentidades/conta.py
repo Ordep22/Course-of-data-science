@@ -92,7 +92,7 @@ class Conta(ABC):
 # =====================================================================
 # EXERCÍCIO 1: CONTA CORRENTE
 # =====================================================================
-class ContaCorrente(Conta): # Herança já definida
+class Conta_Corrente(Conta): # Herança já definida
     """
     Subclasse que representa uma conta corrente.
     Demonstra Polimorfismo ao sobrescrever o método sacar com limite (cheque especial).
@@ -135,7 +135,7 @@ class ContaCorrente(Conta): # Herança já definida
 # =====================================================================
 # EXERCÍCIO 2: CONTA POUPANÇA
 # =====================================================================
-class ContaPoupanca(Conta): # Herança já definida
+class Conta_Poupanca(Conta): # Herança já definida
     """Subclasse que representa uma conta poupança (saque apenas com saldo positivo)."""
 
     def __init__(self, numero: int, cliente):

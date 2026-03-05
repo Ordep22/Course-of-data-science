@@ -8,7 +8,7 @@ class Cliente:
         self.cpf = cpf
         self.conta = []
     
-    def adciona_conta(self, conta):
+    def adiciona_conta(self, conta):
 
         self.conta.append(conta)
     
