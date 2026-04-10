@@ -4,6 +4,8 @@ from dsaentidades.cliente import Cliente
 # Importa a classe base Conta e suas subclasses
 from dsaentidades.conta import Conta, Conta_Corrente, Conta_Poupanca
 
+DEBUG = True
+
 # Importa exceção personalizada
 # from dsautilitarios.exceptions import ContaInexistenteError
 class ContaInexistenteError(Exception):
@@ -63,11 +65,19 @@ class Banco:
         # 2. Se o tipo for 'poupanca', crie um objeto ContaPoupanca.
         # 3. Se não for nenhum dos dois, imprima uma mensagem de erro ("Tipo inválido") e retorne None.
 
+        if DEBUG:
+            print("\nDEBUG Mode: Active")
+            print("Testanto a construção do novo objeto")
+            print(f"Nome do clienete: {cliente.nome}")
+            print(f"CPF: {cliente.cpf}")
+            print(f"Tipo de conta: {tipo}\n")
+
+
         if tipo.lower() == "corrente":
              
             nova_conta  = Conta_Corrente(numero_conta, cliente)
 
-        elif tipo.lower() == "poupanca":
+        elif tipo.lower() == "poupança":
 
             nova_conta  = Conta_Poupanca(numero_conta, cliente)
 

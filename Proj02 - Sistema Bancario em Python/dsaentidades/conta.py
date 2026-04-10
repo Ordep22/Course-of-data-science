@@ -124,6 +124,7 @@ class Conta_Corrente(Conta): # Herança já definida
                 self._saldo -= valor
                 self._historico.append((datetime.now(), f"Saque de R${valor:.2f}"))
                 print(f"Saque de R${valor:.2f} realizado com sucesso.")
+                print(f"Seu novo saldo é de: R${self._saldo}")
             
             else:
                 raise SaldoInsuficienteError(saldo_disponivel, valor, "Saldo e limite insuficientes.")
