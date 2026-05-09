@@ -1,5 +1,5 @@
 """
-Lesson 09.01: Comparing Performance - Numpy vs. Purse Python
+Lesson 09.01: Comparing Performance - Numpy vs. Pure Python
 Course: Python Language Fundamentals - From Basics to AI Applications
 
 Objectives: 
